@@ -22,10 +22,32 @@
         <p id="status">Loading...</p>
     </div>
     <script>            
-        navigator.serviceWorker
-        .register("./sw.js", { type: "module" })
-        .then((reg) => console.log("SW registered!", reg))
-        .catch((err) => console.error("Error registering service worker", err));
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker
+                .register('./sw.js', { type: 'module' })
+                .then((reg) => console.log('SW registered!', reg))
+                .catch((err) => console.error('Error registering service worker', err));
+        } else {
+            console.warn('Service workers not supported');
+        }
+        
+        if ('PushManager' in window) {
+            console.log('Push Notifications supported');
+        } else {
+            console.warn('Push notifications not supported');
+        }
+
+        if ('indexedDB' in window) {
+            console.log('IndexedDB supported');
+        } else {
+            console.warn('IndexedDB not supported');
+        }
+
+        if ('Notification' in window) {
+            console.log('Notification API supported');
+        } else {
+            console.warn('Notifications not supported');
+        }
         </script>
     <script type="module" src="tasks.js"></script>
     <script type="module" src="push.js"></script>

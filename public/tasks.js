@@ -21,6 +21,8 @@
             .catch((error) => {
                 console.error('Error accessing Battery API:', error);
             });
+    } else {
+        console.warn('Battery API not supported');
     }
 
     taskForm.addEventListener('submit', (event) => {
